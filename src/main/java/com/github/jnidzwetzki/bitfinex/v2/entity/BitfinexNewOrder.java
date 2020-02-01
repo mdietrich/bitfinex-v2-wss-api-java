@@ -12,7 +12,7 @@
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
- *    limitations under the License. 
+ *    limitations under the License.
  *
  *******************************************************************************/
 package com.github.jnidzwetzki.bitfinex.v2.entity;
@@ -20,6 +20,7 @@ package com.github.jnidzwetzki.bitfinex.v2.entity;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,149 +32,154 @@ import com.github.jnidzwetzki.bitfinex.v2.entity.currency.BitfinexCurrencyPair;
  */
 public class BitfinexNewOrder {
 
-    /**
-     * Should be unique in the day (UTC) (not enforced)
-     */
-    private long clientId = -1;
+	/**
+	 * Should be unique in the day (UTC) (not enforced)
+	 */
+	private long clientId = -1;
 
-    /**
-     * (optional) Group id for the order
-     */
-    private Optional<Long> clientGroupId = Optional.empty();
+	/**
+	 * (optional) Group id for the order
+	 */
+	private Optional<Long> clientGroupId = Optional.empty();
 
-    /**
-     * currency pair
-     */
-    private BitfinexCurrencyPair currencyPair;
+	/**
+	 * currency pair
+	 */
+	private BitfinexCurrencyPair currencyPair;
 
-    /**
-     * order amount - pPositive for buy, Negative for sell
-     */
-    private BigDecimal amount;
+	/**
+	 * order amount - pPositive for buy, Negative for sell
+	 */
+	private BigDecimal amount;
 
-    /**
-     * order type
-     */
-    private BitfinexOrderType orderType;
+	/**
+	 * order type
+	 */
+	private BitfinexOrderType orderType;
 
-    /**
-     * Price (Not required for market orders)
-     */
-    private BigDecimal price;
+	/**
+	 * Price (Not required for market orders)
+	 */
+	private BigDecimal price;
 
-    /**
-     * The trailing price
-     */
-    private BigDecimal priceTrailing;
+	/**
+	 * The trailing price
+	 */
+	private BigDecimal priceTrailing;
 
-    /**
-     * Auxiliary Limit price (for STOP LIMIT)
-     */
-    private BigDecimal priceAuxLimit;
+	/**
+	 * Auxiliary Limit price (for STOP LIMIT)
+	 */
+	private BigDecimal priceAuxLimit;
 
-    /**
-     * OCO stop price
-     */
-    private BigDecimal priceOcoStop;
+	/**
+	 * OCO stop price
+	 */
+	private BigDecimal priceOcoStop;
 
-    /**
-     * The Order flags
-     */
-    private Set<BitfinexOrderFlag> orderFlags = new HashSet<>();
+	/**
+	 * The Order flags
+	 */
+	private Set<BitfinexOrderFlag> orderFlags = new HashSet<>();
 
-    /**
-     * The api key
-     */
-    private String apiKey;
+	/**
+	 * Meta data
+	 */
+	private Map<String, String> meta;
 
-    public long getClientId() {
-        return clientId;
-    }
+	/**
+	 * The api key
+	 */
+	private String apiKey;
 
-    public void setClientId(final long clientId) {
-        this.clientId = clientId;
-    }
+	public long getClientId() {
+		return clientId;
+	}
 
-    public Optional<Long> getClientGroupId() {
-        return clientGroupId;
-    }
+	public void setClientId(final long clientId) {
+		this.clientId = clientId;
+	}
 
-    public void setClientGroupId(final Long clientGroupId) {
-        this.clientGroupId = Optional.of(clientGroupId);
-    }
+	public Optional<Long> getClientGroupId() {
+		return clientGroupId;
+	}
 
-    public BitfinexCurrencyPair getCurrencyPair() {
-        return currencyPair;
-    }
+	public void setClientGroupId(final Long clientGroupId) {
+		this.clientGroupId = Optional.of(clientGroupId);
+	}
 
-    public void setCurrencyPair(final BitfinexCurrencyPair currencyPair) {
-        this.currencyPair = currencyPair;
-    }
+	public BitfinexCurrencyPair getCurrencyPair() {
+		return currencyPair;
+	}
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
+	public void setCurrencyPair(final BitfinexCurrencyPair currencyPair) {
+		this.currencyPair = currencyPair;
+	}
 
-    public void setAmount(final BigDecimal amount) {
-        this.amount = amount;
-    }
+	public BigDecimal getAmount() {
+		return amount;
+	}
 
-    public BitfinexOrderType getOrderType() {
-        return orderType;
-    }
+	public void setAmount(final BigDecimal amount) {
+		this.amount = amount;
+	}
 
-    public void setOrderType(final BitfinexOrderType orderType) {
-        this.orderType = orderType;
-    }
+	public BitfinexOrderType getOrderType() {
+		return orderType;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public void setOrderType(final BitfinexOrderType orderType) {
+		this.orderType = orderType;
+	}
 
-    public void setPrice(final BigDecimal price) {
-        this.price = price;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public BigDecimal getPriceTrailing() {
-        return priceTrailing;
-    }
+	public void setPrice(final BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setPriceTrailing(final BigDecimal priceTrailing) {
-        this.priceTrailing = priceTrailing;
-    }
+	public BigDecimal getPriceTrailing() {
+		return priceTrailing;
+	}
 
-    public BigDecimal getPriceAuxLimit() {
-        return priceAuxLimit;
-    }
+	public void setPriceTrailing(final BigDecimal priceTrailing) {
+		this.priceTrailing = priceTrailing;
+	}
 
-    public void setPriceAuxLimit(final BigDecimal priceAuxLimit) {
-        this.priceAuxLimit = priceAuxLimit;
-    }
+	public BigDecimal getPriceAuxLimit() {
+		return priceAuxLimit;
+	}
 
-    public BigDecimal getPriceOcoStop() {
-        return priceOcoStop;
-    }
+	public void setPriceAuxLimit(final BigDecimal priceAuxLimit) {
+		this.priceAuxLimit = priceAuxLimit;
+	}
 
-    public void setPriceOcoStop(final BigDecimal priceOcoStop) {
-        this.priceOcoStop = priceOcoStop;
-    }
- 
-    public String getApiKey() {
-        return apiKey;
-    }
+	public BigDecimal getPriceOcoStop() {
+		return priceOcoStop;
+	}
 
-    public void setApiKey(final String apiKey) {
-        this.apiKey = apiKey;
-    }
-    
+	public void setPriceOcoStop(final BigDecimal priceOcoStop) {
+		this.priceOcoStop = priceOcoStop;
+	}
+
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setApiKey(final String apiKey) {
+		this.apiKey = apiKey;
+	}
+
 	public void setOrderFlags(final Set<BitfinexOrderFlag> orderFlags) {
 		this.orderFlags = orderFlags;
 	}
-	
+
 	public Set<BitfinexOrderFlag> getOrderFlags() {
 		return orderFlags;
 	}
-	
+
 	/**
 	 * Convert a flag field into enums
 	 * @param flags
@@ -184,17 +190,17 @@ public class BitfinexNewOrder {
 				.filter(f -> ((f.getFlag() & flags) == f.getFlag()))
 				.collect(Collectors.toSet());
 	}
-	
+
 	/**
 	 * Convert flag enums to flag field
 	 * @return
 	 */
 	public int getCombinedFlags() {
 		return orderFlags
-			.stream()
-			.map(BitfinexOrderFlag::getFlag)
-			.reduce((f1, f2) -> f1 | f2)
-			.orElse(0);
+				.stream()
+				.map(BitfinexOrderFlag::getFlag)
+				.reduce((f1, f2) -> f1 | f2)
+				.orElse(0);
 	}
 
 	@Override
@@ -225,64 +231,94 @@ public class BitfinexNewOrder {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		BitfinexNewOrder other = (BitfinexNewOrder) obj;
 		if (amount == null) {
-			if (other.amount != null)
+			if (other.amount != null) {
 				return false;
-		} else if (!amount.equals(other.amount))
+			}
+		} else if (!amount.equals(other.amount)) {
 			return false;
+		}
 		if (apiKey == null) {
-			if (other.apiKey != null)
+			if (other.apiKey != null) {
 				return false;
-		} else if (!apiKey.equals(other.apiKey))
+			}
+		} else if (!apiKey.equals(other.apiKey)) {
 			return false;
+		}
 		if (clientGroupId == null) {
-			if (other.clientGroupId != null)
+			if (other.clientGroupId != null) {
 				return false;
-		} else if (!clientGroupId.equals(other.clientGroupId))
+			}
+		} else if (!clientGroupId.equals(other.clientGroupId)) {
 			return false;
-		if (clientId != other.clientId)
+		}
+		if (clientId != other.clientId) {
 			return false;
+		}
 		if (currencyPair == null) {
-			if (other.currencyPair != null)
+			if (other.currencyPair != null) {
 				return false;
-		} else if (!currencyPair.equals(other.currencyPair))
+			}
+		} else if (!currencyPair.equals(other.currencyPair)) {
 			return false;
+		}
 		if (orderFlags == null) {
-			if (other.orderFlags != null)
+			if (other.orderFlags != null) {
 				return false;
-		} else if (!orderFlags.equals(other.orderFlags))
+			}
+		} else if (!orderFlags.equals(other.orderFlags)) {
 			return false;
-		if (orderType != other.orderType)
+		}
+		if (orderType != other.orderType) {
 			return false;
+		}
 		if (price == null) {
-			if (other.price != null)
+			if (other.price != null) {
 				return false;
-		} else if (!price.equals(other.price))
+			}
+		} else if (!price.equals(other.price)) {
 			return false;
+		}
 		if (priceAuxLimit == null) {
-			if (other.priceAuxLimit != null)
+			if (other.priceAuxLimit != null) {
 				return false;
-		} else if (!priceAuxLimit.equals(other.priceAuxLimit))
+			}
+		} else if (!priceAuxLimit.equals(other.priceAuxLimit)) {
 			return false;
+		}
 		if (priceOcoStop == null) {
-			if (other.priceOcoStop != null)
+			if (other.priceOcoStop != null) {
 				return false;
-		} else if (!priceOcoStop.equals(other.priceOcoStop))
+			}
+		} else if (!priceOcoStop.equals(other.priceOcoStop)) {
 			return false;
+		}
 		if (priceTrailing == null) {
-			if (other.priceTrailing != null)
+			if (other.priceTrailing != null) {
 				return false;
-		} else if (!priceTrailing.equals(other.priceTrailing))
+			}
+		} else if (!priceTrailing.equals(other.priceTrailing)) {
 			return false;
+		}
 		return true;
 	}
 
+	public Map<String, String> getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Map<String, String> meta) {
+		this.meta = meta;
+	}
 
 }

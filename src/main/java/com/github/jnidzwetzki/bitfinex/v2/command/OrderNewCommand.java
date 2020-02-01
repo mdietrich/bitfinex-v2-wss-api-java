@@ -12,7 +12,7 @@
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
- *    limitations under the License. 
+ *    limitations under the License.
  *
  *******************************************************************************/
 package com.github.jnidzwetzki.bitfinex.v2.command;
@@ -25,36 +25,39 @@ import com.github.jnidzwetzki.bitfinex.v2.exception.BitfinexCommandException;
 
 public class OrderNewCommand implements BitfinexOrderCommand {
 
-    private final BitfinexNewOrder bitfinexOrder;
+	private final BitfinexNewOrder bitfinexOrder;
 
-    public OrderNewCommand(final BitfinexNewOrder bitfinexOrder) {
-        this.bitfinexOrder = bitfinexOrder;
-    }
+	public OrderNewCommand(final BitfinexNewOrder bitfinexOrder) {
+		this.bitfinexOrder = bitfinexOrder;
+	}
 
-    @Override
-    public String getCommand(final BitfinexWebsocketClient client) throws BitfinexCommandException {
-        final JSONObject orderJson = new JSONObject();
-        orderJson.put("type", bitfinexOrder.getOrderType().getBifinexString());
-        orderJson.put("symbol", bitfinexOrder.getCurrencyPair().toBitfinexString());
-        orderJson.put("amount", bitfinexOrder.getAmount().toString());
-        if (bitfinexOrder.getPrice() != null) {
-            orderJson.put("price", bitfinexOrder.getPrice().toString());
-        }
-        if (bitfinexOrder.getPriceTrailing() != null) {
-            orderJson.put("price_trailing", bitfinexOrder.getPriceTrailing().toString());
-        }
-        if (bitfinexOrder.getPriceAuxLimit() != null) {
-            orderJson.put("price_aux_limit", bitfinexOrder.getPriceAuxLimit().toString());
-        }
-        if (bitfinexOrder.getPriceOcoStop() != null) {
-            orderJson.put("price_oco_stop", bitfinexOrder.getPriceOcoStop().toString());
-        }
-        if (!bitfinexOrder.getOrderFlags().isEmpty()) {
-            orderJson.put("flags", bitfinexOrder.getCombinedFlags());
-        }
-        orderJson.put("cid", bitfinexOrder.getClientId());
-        bitfinexOrder.getClientGroupId().ifPresent(groupId -> orderJson.put("gid", bitfinexOrder.getClientGroupId().get()));
-        return "[0, \"on\", null, " + orderJson.toString() + "]";
-    }
+	@Override
+	public String getCommand(final BitfinexWebsocketClient client) throws BitfinexCommandException {
+		final JSONObject orderJson = new JSONObject();
+		orderJson.put("type", bitfinexOrder.getOrderType().getBifinexString());
+		orderJson.put("symbol", bitfinexOrder.getCurrencyPair().toBitfinexString());
+		orderJson.put("amount", bitfinexOrder.getAmount().toString());
+		if (bitfinexOrder.getPrice() != null) {
+			orderJson.put("price", bitfinexOrder.getPrice().toString());
+		}
+		if (bitfinexOrder.getPriceTrailing() != null) {
+			orderJson.put("price_trailing", bitfinexOrder.getPriceTrailing().toString());
+		}
+		if (bitfinexOrder.getPriceAuxLimit() != null) {
+			orderJson.put("price_aux_limit", bitfinexOrder.getPriceAuxLimit().toString());
+		}
+		if (bitfinexOrder.getPriceOcoStop() != null) {
+			orderJson.put("price_oco_stop", bitfinexOrder.getPriceOcoStop().toString());
+		}
+		if (!bitfinexOrder.getOrderFlags().isEmpty()) {
+			orderJson.put("flags", bitfinexOrder.getCombinedFlags());
+		}
+		if (bitfinexOrder.getMeta() != null && !bitfinexOrder.getMeta().isEmpty()) {
+			orderJson.put("meta", bitfinexOrder.getMeta());
+		}
+		orderJson.put("cid", bitfinexOrder.getClientId());
+		bitfinexOrder.getClientGroupId().ifPresent(groupId -> orderJson.put("gid", bitfinexOrder.getClientGroupId().get()));
+		return "[0, \"on\", null, " + orderJson.toString() + "]";
+	}
 
 }
